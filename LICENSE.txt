@@ -1,0 +1,24 @@
+Academic Use License
+
+Copyright (c) [2025] [Dr. Wang]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use the Software for academic, educational, and research purposes, subject to the following conditions:
+
+Non-Commercial Use Only:
+
+This Software may NOT be used for any commercial purposes, including but not limited to:
+Selling or distributing the Software for profit.
+Using the Software as part of a product or service offered for sale.
+Integrating the Software into proprietary or commercial systems.
+Attribution Required:
+
+Proper attribution must be given in any academic publications or presentations that use this Software. The citation should include the Software name, version, and the author's name.
+No Warranty:
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Modification and Distribution:
+
+Users are allowed to modify and distribute the Software for academic purposes, as long as the original license terms are included and respected.
+Termination:
+
+This license shall automatically terminate if the Software is used for commercial purposes without prior written permission from the copyright holder.
