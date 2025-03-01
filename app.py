@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import pickle
 import xgboost as xgb  
+import shap
+import matplotlib.pyplot as plt
+
 # Placeholder for user credentials (replace with secure storage)
 valid_credentials = {"passwordapp": "passwordapp"}
 
@@ -30,7 +33,7 @@ else:
         st.error(f"An error occurred while loading the model: {e}")
         st.stop()
     
-    nhanes_cardiovascular_variables ={'Gender': 'Gender (1 = Male, 2 = Female), [1, 2]',
+    feature_name_mapping ={'Gender': 'Gender (1 = Male, 2 = Female), [1, 2]',
      'BPXPLS': 'Pulse Rate (beats per minute), [56, 96]',
      'BPXSY1': 'Systolic Blood Pressure 1st Reading (mmHg), [94, 152]',
      'BPXSY2': 'Systolic Blood Pressure 2nd Reading (mmHg), [94, 152]',
@@ -55,18 +58,29 @@ else:
     st.title("XGB Prediction")
     
     user_inputs = {}
-    for var in nhanes_cardiovascular_variables:
+    for var in feature_name_mapping:
         if var == 'Gender':
-            user_inputs[var] = st.selectbox(f"Select {nhanes_cardiovascular_variables[var]}", [1, 2])
+            user_inputs[var] = st.selectbox(f"Select {feature_name_mapping[var]}", [1, 2])
         else:
-            user_inputs[var] = st.number_input(f"Enter {nhanes_cardiovascular_variables[var]}", value=var_median[var])
+            user_inputs[var] = st.number_input(f"Enter {feature_name_mapping[var]}", value=var_median[var])
     
     if st.button("Predict"):
-        input_data = pd.DataFrame([list(user_inputs.values())], columns=nhanes_cardiovascular_variables.keys())
+        input_data = pd.DataFrame([list(user_inputs.values())], columns=feature_name_mapping.keys())
     
         try:
             prediction = loaded_model.predict(input_data)
             st.success(f"Predicted Age: {prediction[0]:.4f}")  # Display prediction with 4 decimal places
+            
+            # Initialize the SHAP explainer
+            explainer = shap.Explainer(loaded_model)
+            # Compute SHAP values
+            shap_values = explainer(input_data)
+            shap_values.feature_names = [feature_name_mapping.get(col, col) for col in feature_name_mapping.keys()]
+            # Plot SHAP waterfall and display in Streamlit
+            fig, ax = plt.subplots(figsize=(8, 6))
+            shap.plots.waterfall(shap_values[0], show=False)  # Generate plot without showing
+            st.pyplot(fig) 
+
     
         except Exception as e:
             st.error(f"An error occurred during prediction: {e}")
